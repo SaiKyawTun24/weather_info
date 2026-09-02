@@ -53,6 +53,7 @@ Current _$CurrentFromJson(Map<String, dynamic> json) => Current(
       : Condition.fromJson(json['condition'] as Map<String, dynamic>),
   humidity: (json['humidity'] as num?)?.toInt(),
   cloud: (json['cloud'] as num?)?.toInt(),
+  windKph: (json['wind_kph'] as num?)?.toDouble(),
 );
 
 Map<String, dynamic> _$CurrentToJson(Current instance) => <String, dynamic>{
@@ -62,6 +63,7 @@ Map<String, dynamic> _$CurrentToJson(Current instance) => <String, dynamic>{
   'condition': instance.condition,
   'humidity': instance.humidity,
   'cloud': instance.cloud,
+  'wind_kph': instance.windKph,
 };
 
 Condition _$ConditionFromJson(Map<String, dynamic> json) => Condition(

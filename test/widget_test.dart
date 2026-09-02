@@ -7,24 +7,34 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:weather_info/main.dart';
+import 'package:weather_info/weather/weather_provider.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  testWidgets('shows the weather search screen', (WidgetTester tester) async {
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [weatherProvider.overrideWith(_FakeWeatherNotifier.new)],
+        child: const MyApp(),
+      ),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    await tester.pumpAndSettle();
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    expect(find.text('Weather Atlas'), findsOneWidget);
+    expect(find.text('Find your weather'), findsOneWidget);
+    expect(find.byType(TextField), findsOneWidget);
   });
+}
+
+class _FakeWeatherNotifier extends WeatherNotifier {
+  @override
+  WeatherState build() {
+    return const WeatherState();
+  }
+
+  @override
+  void setLoading(bool value) {}
 }

@@ -56,8 +56,8 @@ class Current {
   Condition? condition;
   int? humidity;
   int? cloud;
-  @JsonKey(includeFromJson: false, includeToJson: false)
-  bool? isFavorite;
+  @JsonKey(name: 'wind_kph')
+  double? windKph;
 
   Current({
     this.tempC,
@@ -66,7 +66,7 @@ class Current {
     this.condition,
     this.humidity,
     this.cloud,
-    this.isFavorite = false,
+    this.windKph,
   });
 
   factory Current.fromJson(Map<String, dynamic> json) =>
