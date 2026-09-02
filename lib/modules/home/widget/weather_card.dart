@@ -64,36 +64,40 @@ class WeatherCard extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 28),
-            Row(
+            const SizedBox(height: 22),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (iconUrl != null)
-                  Image.network(
-                    iconUrl.startsWith('//') ? 'https:$iconUrl' : iconUrl,
-                    width: 72,
-                    height: 72,
-                    errorBuilder: (_, _, _) => const Icon(
-                      Icons.cloud_rounded,
-                      color: AppColors.white,
-                      size: 64,
+                Row(
+                  children: [
+                    if (iconUrl != null)
+                      Image.network(
+                        iconUrl.startsWith('//') ? 'https:$iconUrl' : iconUrl,
+                        width: 72,
+                        height: 72,
+                        errorBuilder: (_, _, _) => const Icon(
+                          Icons.cloud_rounded,
+                          color: AppColors.white,
+                          size: 64,
+                        ),
+                      ),
+                    const SizedBox(width: 12),
+                    Text(
+                      '${current?.tempC?.round() ?? '--'}°',
+                      style: AppTextStyles.tempValue,
                     ),
-                  ),
-                const SizedBox(width: 12),
-                Text(
-                  '${current?.tempC?.round() ?? '--'}°',
-                  style: AppTextStyles.tempValue,
+                    const Spacer(),
+                  ],
                 ),
-                const Spacer(),
-                Flexible(
-                  child: Text(
-                    condition?.text ?? 'Current conditions unavailable',
-                    textAlign: TextAlign.right,
-                    style: AppTextStyles.conditionText,
-                  ),
+                const SizedBox(height: 16),
+                Text(
+                  condition?.text ?? 'Current conditions unavailable',
+                  textAlign: TextAlign.right,
+                  style: AppTextStyles.conditionText,
                 ),
               ],
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 22),
             Row(
               children: [
                 Metric(
