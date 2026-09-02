@@ -1,5 +1,9 @@
+import 'package:flutter/material.dart';
+import 'package:weather_info/core/constant/color_const.dart';
+
 class SearchBox extends StatelessWidget {
   const SearchBox({
+    super.key,
     required this.controller,
     required this.enabled,
     required this.onSearch,

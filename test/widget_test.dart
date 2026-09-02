@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:weather_info/main.dart';
-import 'package:weather_info/weather/weather_provider.dart';
+import 'package:weather_info/modules/home/provider/weather_provider.dart';
 
 void main() {
   testWidgets('shows the weather search screen', (WidgetTester tester) async {

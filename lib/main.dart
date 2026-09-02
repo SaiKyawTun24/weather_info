@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'my_main/my_main.dart';
+import 'package:weather_info/core/constant/color_const.dart';
+import 'package:weather_info/modules/home/home_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,11 +20,11 @@ class MyApp extends StatelessWidget {
       title: 'Weather Atlas',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF0B7285)),
-        scaffoldBackgroundColor: const Color(0xFFF5F3EE),
+        colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primarySeed),
+        scaffoldBackgroundColor: AppColors.background,
         useMaterial3: true,
       ),
-      home: const MyMain(),
+      home: const HomeScreen(),
     );
   }
 }

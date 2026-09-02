@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../core/base_provider/base_provider.dart';
-import '../core/base_provider/base_state.dart';
-import '../data/api_service/api_service.dart';
-import '../data/local_storage/shared_preferences_service.dart';
-import '../data/model/weather_response.dart';
-import '../data/repository/repository.dart';
-import '../data/repository/repository_impl.dart';
+import '../../../core/base_provider/base_provider.dart';
+import '../../../core/base_provider/base_state.dart';
+import '../../../data/api_service/api_service.dart';
+import '../../../data/local_storage/shared_preferences_service.dart';
+import '../../../data/model/weather_response.dart';
+import '../../../data/repository/repository.dart';
+import '../../../data/repository/repository_impl.dart';
 
 final apiServiceProvider = Provider<ApiService>((_) => ApiService.create());
 

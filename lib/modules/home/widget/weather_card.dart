@@ -1,5 +1,12 @@
+import 'package:flutter/material.dart';
+import 'package:weather_info/core/constant/color_const.dart';
+import 'package:weather_info/core/constant/style.dart';
+import 'package:weather_info/data/model/weather_response.dart';
+import 'package:weather_info/modules/home/widget/metric.dart';
+
 class WeatherCard extends StatelessWidget {
   const WeatherCard({
+    super.key,
     required this.weather,
     required this.isFavorite,
     required this.onToggleFavorite,
@@ -89,15 +96,15 @@ class WeatherCard extends StatelessWidget {
             const SizedBox(height: 24),
             Row(
               children: [
-                _Metric(
+                Metric(
                   label: 'Humidity',
                   value: '${current?.humidity ?? '--'}%',
                 ),
-                _Metric(
+                Metric(
                   label: 'Wind speed',
                   value: '${current?.windKph?.toStringAsFixed(1) ?? '--'} km/h',
                 ),
-                _Metric(
+                Metric(
                   label: 'Cloud cover',
                   value: '${current?.cloud ?? '--'}%',
                 ),
