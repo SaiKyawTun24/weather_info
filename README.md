@@ -48,6 +48,34 @@ dart run build_runner watch --delete-conflicting-outputs
 Generated files such as `weather_response.g.dart` and `api_service.g.dart`
 should be regenerated before running or building the app.
 
+## Folder Structure
+
+```text
+lib/
+├── core/
+│   ├── base_provider/    # Shared provider state and request handling
+│   ├── config/           # Environment-based app configuration
+│   ├── constant/         # App colors and text styles
+│   └── error_handle/     # Dio and network error mapping
+├── data/
+│   ├── api_service/      # Retrofit/Dio WeatherAPI client
+│   ├── local_storage/    # Favorites and recent-search persistence
+│   ├── model/            # Weather response models
+│   └── repository/       # Repository abstraction and implementation
+├── generated/            # Application-generated assets
+├── modules/
+│   └── home/
+│       ├── provider/     # Weather state and user actions
+│       ├── widget/       # Home screen UI components
+│       └── home_screen.dart
+└── main.dart
+
+test/
+├── weather_provider_test.dart
+├── shared_preferences_persistence_test.dart
+└── widget_test.dart
+```
+
 ## Run
 
 ```bash
@@ -66,13 +94,20 @@ flutter run -d chrome
 flutter test
 ```
 
-The test suite covers successful weather retrieval, API failure handling, and
-favorite add/remove behavior.
+The test suite covers successful weather retrieval, API failure handling,
+favorite add/remove behavior, and favorite persistence after recreating the
+storage service.
 
 To run only the required provider tests:
 
 ```bash
 flutter test test/weather_provider_test.dart
+```
+
+To run the favorites persistence test:
+
+```bash
+flutter test test/shared_preferences_persistence_test.dart
 ```
 
 To run one test at a time:

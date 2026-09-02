@@ -12,10 +12,7 @@ import '../../../data/repository/repository_impl.dart';
 final apiServiceProvider = Provider<ApiService>((_) => ApiService.create());
 
 final repositoryProvider = Provider<Repository>((ref) {
-  return RepositoryImpl(
-    apiService: ref.watch(apiServiceProvider),
-    sharedPreferencesService: ref.watch(sharedPreferencesServiceProvider),
-  );
+  return RepositoryImpl(apiService: ref.watch(apiServiceProvider));
 });
 
 final weatherProvider = NotifierProvider<WeatherNotifier, WeatherState>(
