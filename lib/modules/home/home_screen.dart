@@ -30,10 +30,6 @@ class _HomeState extends ConsumerState<HomeScreen> {
     final notifier = ref.read(weatherProvider.notifier);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        title: const Text('Weather Atlas', style: AppTextStyles.appBarTitle),
-      ),
       body: SafeArea(
         child: Center(
           child: ConstrainedBox(
