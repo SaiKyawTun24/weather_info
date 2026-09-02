@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../error_handle/error_handle.dart';
 import 'base_state.dart';
@@ -18,7 +17,6 @@ abstract class BaseProvider<T extends BaseState> extends Notifier<T> {
     void Function()? onStart,
     void Function()? onComplete,
     bool showLoading = true,
-    bool showErrorMessage = true,
   }) async {
     try {
       if (showLoading) {
@@ -36,19 +34,11 @@ abstract class BaseProvider<T extends BaseState> extends Notifier<T> {
 
       final MyDioException exception = handleDioError(dioError);
 
-      return await _handleException(
-        exception: exception,
-        onError: onError,
-        showErrorMessage: showErrorMessage,
-      );
+      return await _handleException(exception: exception, onError: onError);
     } on MyDioException catch (exception, stacktrace) {
       _debugLog('MyDioException stacktrace: $stacktrace');
 
-      return await _handleException(
-        exception: exception,
-        onError: onError,
-        showErrorMessage: showErrorMessage,
-      );
+      return await _handleException(exception: exception, onError: onError);
     } catch (e, stacktrace) {
       _debugLog('Unknown exception: $e');
       _debugLog('Unknown exception stacktrace: $stacktrace');
@@ -57,10 +47,6 @@ abstract class BaseProvider<T extends BaseState> extends Notifier<T> {
         message: 'Something went wrong. Please try again.',
         statusCode: null,
       );
-
-      if (showErrorMessage) {
-        _handleError(exception);
-      }
 
       onError?.call(exception);
       return null;
@@ -76,22 +62,9 @@ abstract class BaseProvider<T extends BaseState> extends Notifier<T> {
   Future<R?> _handleException<R>({
     required MyDioException exception,
     required void Function(MyDioException exception)? onError,
-    required bool showErrorMessage,
   }) async {
-    if (showErrorMessage) {
-      _handleError(exception);
-    }
-
     onError?.call(exception);
     return null;
-  }
-
-  void _handleError(MyDioException exception) {
-    final String message = exception.message.isNotEmpty
-        ? exception.message
-        : 'Something went wrong. Please try again later.';
-
-    EasyLoading.showError(message);
   }
 
   void _startLoading() {
