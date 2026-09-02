@@ -1,0 +1,103 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+Thumbs.db
+Desktop.ini
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+*.bak
+*.tmp
+*.old
+
+# Visual Studio Code related
+.classpath
+.project
+.settings/
+.vscode/*.code-snippets
+*.code-workspace
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+cmake-build-*/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.fvm/
+.venv/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+.packages
+.flutter-plugins
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android related
+**/android/local.properties
+**/android/key.properties
+**/android/app/google-services.json
+**/android/app/src/main/res/raw/google_services.json
+**/android/.gradle/
+**/android/captures/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+*.jks
+*.keystore
+*.apk
+*.aab
+
+# iOS related
+**/ios/Pods/
+**/ios/.pwb/
+**/ios/Runner/GeneratedPluginRegistrant.*
+**/ios/DerivedData/
+*.moved-aside
+*.xcuserstate
+ServiceDevice
+xcuserdata/
+*.xcworkspace/contents.xcworkspacedata
+
+# Web related
+**/web/index.html.gz
+**/web/main.dart.js*
+
+# Mac specific
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Secret files
+.env*
+!.env.example
+secrets.dart
+
+# Optional: Generated files (build_runner)
+# Professional apps often commit .g.dart files to ensure consistency,
+# but if you prefer to keep the repo clean and run build_runner on CI:
+# *.g.dart
+# *.freezed.dart
