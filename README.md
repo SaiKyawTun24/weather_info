@@ -36,13 +36,13 @@ This project uses `json_serializable` and Retrofit code generators. Run the
 following command after changing annotated models or API service methods:
 
 ```bash
-dart run build_runner build
+dart run build_runner build --delete-conflicting-outputs
 ```
 
 During development, use watch mode to regenerate files automatically:
 
 ```bash
-dart run build_runner watch
+dart run build_runner watch --delete-conflicting-outputs
 ```
 
 Generated files such as `weather_response.g.dart` and `api_service.g.dart`
