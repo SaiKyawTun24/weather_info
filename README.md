@@ -69,6 +69,20 @@ flutter test
 The test suite covers successful weather retrieval, API failure handling, and
 favorite add/remove behavior.
 
+To run only the required provider tests:
+
+```bash
+flutter test test/weather_provider_test.dart
+```
+
+To run one test at a time:
+
+```bash
+flutter test test/weather_provider_test.dart --plain-name "successfully retrieves and stores current weather"
+flutter test test/weather_provider_test.dart --plain-name "handles API failure with the server error message"
+flutter test test/weather_provider_test.dart --plain-name "adds and removes the current city from favorites"
+```
+
 ## Architecture
 
 - **State management:** Riverpod `NotifierProvider` owns the screen state and
