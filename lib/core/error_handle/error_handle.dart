@@ -65,12 +65,15 @@ MyDioException _parseDioErrorResponse(DioException dioError) {
   try {
     if (data is Map) {
       final bodyStatusCode = data["statusCode"] ?? data["code"];
+      final nestedError = data["error"];
 
       statusCode ??= bodyStatusCode is int
           ? bodyStatusCode
           : int.tryParse(bodyStatusCode?.toString() ?? "");
 
-      serverMessage = data["message"]?.toString();
+      serverMessage =
+          data["message"]?.toString() ??
+          (nestedError is Map ? nestedError["message"]?.toString() : null);
     } else if (data is String && data.trim().isNotEmpty) {
       serverMessage = data;
     }

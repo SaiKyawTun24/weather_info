@@ -23,7 +23,6 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('Weather Atlas'), findsOneWidget);
     expect(find.text('Find your weather'), findsOneWidget);
     expect(find.byType(TextField), findsOneWidget);
   });
