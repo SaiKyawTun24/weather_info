@@ -25,7 +25,7 @@ A Flutter mobile weather search application powered by WeatherAPI.com.
 
 	 ```text
 	 BASE_URL=https://api.weatherapi.com/v1
-	 API_KEY=your_weatherapi_key
+	 API_KEY=weather_api_key
 	 ```
 
 `.env` is ignored by Git. Never commit the real API key.
