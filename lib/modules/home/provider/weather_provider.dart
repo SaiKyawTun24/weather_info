@@ -41,6 +41,7 @@ class WeatherState extends BaseState {
 
   WeatherState withChanges({
     WeatherResponse? weather,
+    bool clearWeather = false,
     String? query,
     String? errorMessage,
     bool clearErrorMessage = false,
@@ -52,7 +53,7 @@ class WeatherState extends BaseState {
     bool? success,
   }) {
     return WeatherState(
-      weather: weather ?? this.weather,
+      weather: clearWeather ? null : weather ?? this.weather,
       query: query ?? this.query,
       errorMessage: clearErrorMessage
           ? null
@@ -92,6 +93,7 @@ class WeatherNotifier extends BaseProvider<WeatherState> {
 
     state = state.withChanges(
       query: city,
+      clearWeather: true,
       error: false,
       success: false,
       clearErrorMessage: true,
@@ -101,6 +103,7 @@ class WeatherNotifier extends BaseProvider<WeatherState> {
       () => _repository.getCurrentWeather(city),
       onError: (exception) {
         state = state.withChanges(
+          clearWeather: true,
           error: true,
           success: false,
           errorMessage: exception.message,

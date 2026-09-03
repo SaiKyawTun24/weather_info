@@ -95,8 +95,9 @@ flutter test
 ```
 
 The test suite covers successful weather retrieval, API failure handling,
-favorite add/remove behavior, and favorite persistence after recreating the
-storage service.
+loading state, retry behavior, favorite add/remove behavior, favorite
+persistence after recreating the storage service, and recent-search ordering
+with the ten-entry limit.
 
 To run only the required provider tests:
 
@@ -104,7 +105,7 @@ To run only the required provider tests:
 flutter test test/weather_provider_test.dart
 ```
 
-To run the favorites persistence test:
+To run the persistence and recent-search tests:
 
 ```bash
 flutter test test/shared_preferences_persistence_test.dart

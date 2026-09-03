@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -97,6 +99,66 @@ void main() {
     expect(state.error, isTrue);
     expect(state.success, isFalse);
     expect(state.errorMessage, 'No matching location found.');
+    expect(state.weather, isNull);
+  });
+
+  test(
+    'shows loading while retrieving weather and clears it afterwards',
+    () async {
+      final repository = _MockRepository();
+      final storage = _MockStorage();
+      _stubEmptyStorage(storage);
+      final response = Completer<WeatherResponse>();
+      when(
+        () => repository.getCurrentWeather('Yangon'),
+      ).thenAnswer((_) => response.future);
+
+      final container = _createContainer(
+        repository: repository,
+        storage: storage,
+      );
+      addTearDown(container.dispose);
+      final notifier = container.read(weatherProvider.notifier);
+      final search = notifier.search('Yangon');
+
+      await Future<void>.delayed(Duration.zero);
+      expect(container.read(weatherProvider).isLoading, isTrue);
+
+      response.complete(_weather());
+      await search;
+      expect(container.read(weatherProvider).isLoading, isFalse);
+    },
+  );
+
+  test('retry repeats the last search query', () async {
+    final repository = _MockRepository();
+    final storage = _MockStorage();
+    _stubEmptyStorage(storage);
+    var attempts = 0;
+    when(() => repository.getCurrentWeather('Yangon')).thenAnswer((_) async {
+      attempts++;
+      if (attempts == 1) {
+        throw DioException(
+          type: DioExceptionType.connectionError,
+          requestOptions: RequestOptions(path: '/current.json'),
+        );
+      }
+      return _weather();
+    });
+
+    final container = _createContainer(
+      repository: repository,
+      storage: storage,
+    );
+    addTearDown(container.dispose);
+    final notifier = container.read(weatherProvider.notifier);
+
+    await notifier.search('Yangon');
+    expect(container.read(weatherProvider).error, isTrue);
+
+    await notifier.retry();
+    expect(container.read(weatherProvider).success, isTrue);
+    verify(() => repository.getCurrentWeather('Yangon')).called(2);
   });
 
   test('adds and removes the current city from favorites', () async {

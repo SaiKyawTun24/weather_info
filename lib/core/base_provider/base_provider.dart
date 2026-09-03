@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../error_handle/error_handle.dart';
 import 'base_state.dart';
@@ -85,32 +84,5 @@ abstract class BaseProvider<T extends BaseState> extends Notifier<T> {
     if (kDebugMode) {
       debugPrint(message?.toString());
     }
-  }
-
-  Future<void> showCustomDialog(BuildContext context, Widget widget) {
-    return showDialog<void>(
-      context: context,
-      builder: (BuildContext context) {
-        return widget;
-      },
-    );
-  }
-
-  Future<R?> customButtonSheet<R>(
-    BuildContext context,
-    Widget widget, {
-    Color? backgroundColor,
-  }) {
-    return showModalBottomSheet<R>(
-      context: context,
-      backgroundColor:
-          backgroundColor ?? Theme.of(context).scaffoldBackgroundColor,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(24.0)),
-      ),
-      builder: (BuildContext context) {
-        return widget;
-      },
-    );
   }
 }

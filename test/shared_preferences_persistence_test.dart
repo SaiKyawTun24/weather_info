@@ -19,4 +19,19 @@ void main() {
     await secondSession.removeFavorite(city);
     expect(await firstSession.getFavorites(), isNot(contains(city)));
   });
+
+  test('recent searches are newest first and limited to ten entries', () async {
+    SharedPreferencesAsyncPlatform.instance =
+        InMemorySharedPreferencesAsync.empty();
+    final storage = SharedPreferencesService();
+
+    for (var index = 1; index <= 11; index++) {
+      await storage.addRecentSearch('City $index');
+    }
+
+    final recentSearches = await storage.getRecentSearches();
+    expect(recentSearches, hasLength(10));
+    expect(recentSearches.first, 'City 11');
+    expect(recentSearches.last, 'City 2');
+  });
 }
