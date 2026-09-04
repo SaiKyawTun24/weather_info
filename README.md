@@ -4,7 +4,6 @@ A Flutter mobile weather search application powered by WeatherAPI.com.
 
 ## Requirements
 
-- Flutter SDK with Dart 3.12 or newer
 - A WeatherAPI.com API key
 
 ## Setup
